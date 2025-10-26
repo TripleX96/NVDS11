@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 820">
+  <defs>
+    <linearGradient id="skyGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d9f1dc"/>
+      <stop offset="1" stop-color="#ebf8ed"/>
+    </linearGradient>
+    <linearGradient id="mountainGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#82c59a"/>
+      <stop offset="1" stop-color="#27945b"/>
+    </linearGradient>
+    <linearGradient id="fieldGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4efe6"/>
+      <stop offset="1" stop-color="#d9c9af"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="820" fill="url(#skyGradient)"/>
+  <path d="M0 360 C140 300 220 280 360 330 C520 390 640 340 640 340 L640 820 L0 820 Z" fill="url(#mountainGradient)"/>
+  <path d="M0 540 C120 500 220 520 340 540 C460 560 560 520 640 500 L640 820 L0 820 Z" fill="#0f6a3e" opacity="0.65"/>
+  <path d="M0 620 C120 600 220 630 340 640 C460 650 560 620 640 600 L640 820 L0 820 Z" fill="url(#fieldGradient)" opacity="0.85"/>
+  <path d="M40 660 C160 640 240 660 360 670 C480 680 560 660 600 650" fill="none" stroke="#ffffff" stroke-opacity="0.4" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="520" cy="180" r="48" fill="#fdd18c" opacity="0.65"/>
+  <circle cx="180" cy="220" r="22" fill="#ffffff" opacity="0.45"/>
+  <circle cx="240" cy="180" r="18" fill="#ffffff" opacity="0.35"/>
+</svg>

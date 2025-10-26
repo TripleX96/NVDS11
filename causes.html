@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Causes – NVDS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="causes-page">
+  <header class="site-header">
+    <div class="site-header__bar">
+      <a class="site-header__brand" href="index.html#home" data-content-href-key="nav.logoLink" aria-label="Go to homepage">
+        <div class="site-header__logo" data-image-slot="nav-logo">
+          <img
+            src="assets/nvds-logo.svg"
+            alt="Nepal Village Development Service logo"
+            data-slot-image
+            data-default-src="assets/nvds-logo.svg"
+          >
+        </div>
+        <span class="site-header__brand-text" data-content-key="nav.logoText">NVDS</span>
+      </a>
+      <div class="site-header__menu">
+        <button class="site-header__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav" data-nav-toggle>
+          <span class="site-header__toggle-lines" aria-hidden="true"></span>
+        </button>
+        <nav class="site-header__nav" id="primary-nav" aria-label="Primary">
+          <a href="index.html#home" data-content-key="nav.home" data-content-href-key="nav.homeLink">Home</a>
+          <a href="about.html" data-content-key="nav.about" data-content-href-key="nav.aboutLink">About</a>
+          <a href="causes.html" data-content-key="nav.causes" data-content-href-key="nav.causesLink" aria-current="page">Causes</a>
+          <a href="blog.html" data-content-key="nav.blog" data-content-href-key="nav.blogLink">Blog</a>
+          <a href="volunteer.html" data-content-key="nav.volunteer" data-content-href-key="nav.volunteerLink">Volunteer</a>
+          <a href="contact.html" data-content-key="nav.contact" data-content-href-key="nav.contactLink">Contact</a>
+        </nav>
+        <a class="site-header__cta" href="donate.html" data-content-key="nav.donate" data-content-href-key="nav.donateLink">Donate Now</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="causes-hero" id="overview">
+      <div class="container causes-hero__grid">
+        <div class="causes-hero__intro">
+          <span class="causes-hero__badge" data-content-key="causes.hero.badge">Our causes</span>
+          <h1 class="causes-hero__heading" data-content-key="causes.hero.heading">Programmes that uplift every generation</h1>
+          <p class="causes-hero__description" data-content-key="causes.hero.description">
+            We partner with rural communities to meet urgent needs while building the foundations for long-term resilience. Explore how each initiative moves us closer to lasting opportunity.
+          </p>
+          <div class="causes-hero__actions">
+            <a class="btn btn--primary" href="donate.html" data-content-key="causes.hero.primaryButtonLabel" data-content-href-key="causes.hero.primaryButtonHref">Support a cause</a>
+            <a class="text-link" href="volunteer.html" data-content-key="causes.hero.secondaryButtonLabel" data-content-href-key="causes.hero.secondaryButtonHref">Become a volunteer</a>
+          </div>
+          <dl class="causes-hero__stats">
+            <div>
+              <dt data-content-key="causes.hero.stat1.label">Health camps</dt>
+              <dd data-content-key="causes.hero.stat1.value">56+</dd>
+            </div>
+            <div>
+              <dt data-content-key="causes.hero.stat2.label">Communities served</dt>
+              <dd data-content-key="causes.hero.stat2.value">32</dd>
+            </div>
+            <div>
+              <dt data-content-key="causes.hero.stat3.label">Women trained</dt>
+              <dd data-content-key="causes.hero.stat3.value">1,100</dd>
+            </div>
+          </dl>
+        </div>
+        <div class="causes-hero__media">
+          <div class="image-frame image-frame--tall" data-image-slot="causes-hero-primary"></div>
+          <div class="image-frame image-frame--square causes-hero__secondary" data-image-slot="causes-hero-secondary"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="causes-focus" id="focus">
+      <div class="container causes-focus__header">
+        <h2 data-content-key="causes.focus.title">Where your support makes the greatest impact</h2>
+        <p data-content-key="causes.focus.description">
+          Each programme responds to local priorities identified by the community. Together we create pathways to wellbeing, opportunity, and dignity.
+        </p>
+      </div>
+      <div class="container causes-focus__grid">
+        <article class="card causes-focus__card">
+          <div class="image-frame card__image" data-image-slot="causes-focus-one"></div>
+          <div class="card__body">
+            <h3 data-content-key="causes.focus.card1.title">Healthcare access</h3>
+            <p data-content-key="causes.focus.card1.description">
+              Mobile health clinics, maternal care, and wellness education ensure families receive the support they need close to home.
+            </p>
+            <a class="text-link" href="contact.html" data-content-key="causes.focus.card1.linkLabel" data-content-href-key="causes.focus.card1.linkHref">Partner with us</a>
+          </div>
+        </article>
+        <article class="card causes-focus__card">
+          <div class="image-frame card__image" data-image-slot="causes-focus-two"></div>
+          <div class="card__body">
+            <h3 data-content-key="causes.focus.card2.title">Education &amp; skills</h3>
+            <p data-content-key="causes.focus.card2.description">
+              Scholarships, literacy groups, and technical training support lifelong learning for children, youth, and caregivers.
+            </p>
+            <a class="text-link" href="volunteer.html" data-content-key="causes.focus.card2.linkLabel" data-content-href-key="causes.focus.card2.linkHref">Volunteer your expertise</a>
+          </div>
+        </article>
+        <article class="card causes-focus__card">
+          <div class="image-frame card__image" data-image-slot="causes-focus-three"></div>
+          <div class="card__body">
+            <h3 data-content-key="causes.focus.card3.title">Livelihood resilience</h3>
+            <p data-content-key="causes.focus.card3.description">
+              Cooperative farming, savings groups, and clean energy solutions help households thrive and weather change.
+            </p>
+            <a class="text-link" href="donate.html" data-content-key="causes.focus.card3.linkLabel" data-content-href-key="causes.focus.card3.linkHref">See fund priorities</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="causes-programmes" id="programmes">
+      <div class="container causes-programmes__grid">
+        <div class="causes-programmes__media">
+          <div class="image-frame image-frame--portrait" data-image-slot="causes-programmes-primary"></div>
+        </div>
+        <div class="causes-programmes__content">
+          <span class="causes-programmes__eyebrow" data-content-key="causes.programmes.eyebrow">How we work</span>
+          <h2 data-content-key="causes.programmes.title">Community-led programmes that transform futures</h2>
+          <p data-content-key="causes.programmes.description">
+            Our teams co-design initiatives alongside village leaders. Every project passes through three guiding stages that keep solutions rooted in local wisdom and measurable outcomes.
+          </p>
+          <ol class="causes-programmes__steps">
+            <li>
+              <h3 data-content-key="causes.programmes.step1.title">Listen &amp; map priorities</h3>
+              <p data-content-key="causes.programmes.step1.description">
+                We gather insights through household visits, focus groups, and youth councils to understand emerging needs.
+              </p>
+            </li>
+            <li>
+              <h3 data-content-key="causes.programmes.step2.title">Build capacity together</h3>
+              <p data-content-key="causes.programmes.step2.description">
+                Local facilitators receive training, resources, and mentorship so programmes remain community-owned.
+              </p>
+            </li>
+            <li>
+              <h3 data-content-key="causes.programmes.step3.title">Measure &amp; share impact</h3>
+              <p data-content-key="causes.programmes.step3.description">
+                We track outcomes with the community, celebrate milestones, and revise plans to keep momentum strong.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="causes-cta" id="cta">
+      <div class="container causes-cta__layout">
+        <div class="image-frame image-frame--panorama causes-cta__backdrop" data-image-slot="causes-cta-backdrop"></div>
+        <div class="causes-cta__card">
+          <h2 data-content-key="causes.cta.title">Ready to champion a cause?</h2>
+          <p data-content-key="causes.cta.description">
+            Bring your voice to rural Nepal. Sponsor a programme, lead a fundraiser, or share your skills with our partner communities.
+          </p>
+          <div class="causes-cta__actions">
+            <a class="btn btn--primary" href="donate.html" data-content-key="causes.cta.primaryButtonLabel" data-content-href-key="causes.cta.primaryButtonHref">Fund a project</a>
+            <a class="btn btn--ghost" href="contact.html" data-content-key="causes.cta.secondaryButtonLabel" data-content-href-key="causes.cta.secondaryButtonHref">Talk to our team</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="contact">
+    <div class="container footer__grid">
+      <div class="footer__brand-block">
+        <div class="footer__brandline">
+          <div class="footer__mark" data-image-slot="nav-logo">
+            <img src="assets/nvds-logo.svg" alt="Nepal Village Development Service logo" data-slot-image data-default-src="assets/nvds-logo.svg">
+          </div>
+          <div class="footer__brand-name">NVDS</div>
+        </div>
+        <p class="footer__desc">We help organizations showcase their mission, accept donations seamlessly, &amp; engage supporters effectively.</p>
+        <div class="footer__socials">
+          <a class="footer__social" href="#" aria-label="Instagram" title="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5a5.5 5.5 0 1 1 0 11.001 5.5 5.5 0 0 1 0-11zm0 2a3.5 3.5 0 1 0 .001 7.001A3.5 3.5 0 0 0 12 9.5zM18 6.4a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/></svg>
+          </a>
+          <a class="footer__social" href="#" aria-label="Facebook" title="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 10.5H16l.5-3h-3V6a1 1 0 0 1 1-1h2V2h-2.5A3.5 3.5 0 0 0 10 5.5V7.5H8v3h2v8h3.5v-8z"/></svg>
+          </a>
+          <a class="footer__social" href="#" aria-label="X" title="X">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l7.5 9.1L3.7 21H7l5-6.4L17.8 21H21l-8.1-9.8L20.4 3H17L12 8.9 7.2 3z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <nav class="footer__col" aria-label="Quick Links">
+        <h4>Quick Links</h4>
+        <ul class="footer__navlist">
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="causes.html">Our Causes</a></li>
+          <li><a href="volunteer.html">Volunteers</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__col" aria-label="Get Involved">
+        <h4>Get Involved</h4>
+        <ul class="footer__navlist">
+          <li><a href="donate.html">Donate</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="volunteer.html">Volunteer</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer__col">
+        <h4>Our Address</h4>
+        <ul class="footer__contact">
+          <li>
+            <span class="footer__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+            </span>
+            <div>New Baneshwor, Kathmandu, Nepal</div>
+          </li>
+          <li>
+            <span class="footer__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm-1.4 3L12 12.25 5.4 7h13.2z"/></svg>
+            </span>
+            <a href="mailto:nvdssoc@gmail.com">nvdssoc@gmail.com</a>
+          </li>
+          <li>
+            <span class="footer__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6.6 10.8a12.8 12.8 0 0 0 6.6 6.6l2.2-2.2c.2-.2.5-.3.8-.2 1 .3 2 .5 3 .5.4 0 .8.3.8.8V20c0 .4-.3.8-.8.8C9.8 20.8 3.2 14.2 3.2 6.8c0-.4.3-.8.8-.8H6c.4 0 .8.3.8.8 0 1 .2 2 .5 3 .1.3 0 .6-.2.8l-2.5 2.4z"/></svg>
+            </span>
+            <a href="tel:+9779841499048">+977-9841499048</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>&copy; <span id="year"></span> NVDS. All Rights Reserved</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="nvdsGradient" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#ebf8ed"/>
+      <stop offset="100%" stop-color="#d9f1dc"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="200" height="200" rx="40" fill="url(#nvdsGradient)"/>
+  <g fill="#0f6a3e">
+    <path d="M62 126c22-6 40-37 40-46 0 0 0 0 0 0s0 0 0 0c0 9 18 40 40 46-12 9-29 15-40 15s-28-6-40-15z" opacity=".2"/>
+    <path d="M100 127c-17.8-12.6-27-27-27-39.4 0-11.3 8-18.6 18.3-18.6 6.4 0 11.5 2.7 15 7.8 3.5-5.1 8.6-7.8 15-7.8 10.3 0 18.3 7.3 18.3 18.6 0 12.4-9.2 26.8-27 39.4l-3.3 2.3z" opacity=".55"/>
+    <path d="M100 118.6c-13.2-9-20-19.7-20-28.4 0-8.1 5.7-13.4 13-13.4 4.7 0 8.5 2 11 5.7 2.5-3.7 6.3-5.7 11-5.7 7.3 0 13 5.3 13 13.4 0 8.7-6.8 19.4-20 28.4l-2.2 1.5z"/>
+  </g>
+  <text x="100" y="145" text-anchor="middle" font-family="'Playfair Display', 'Georgia', serif" font-size="44" fill="#0a4b2b">NVDS</text>
+</svg>

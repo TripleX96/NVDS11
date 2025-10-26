@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Live Chat Widget Demo</title>
+  <!-- Styles: all widget CSS is scoped to lc-* to avoid conflicts -->
+  <style>
+    :root {
+      /* Use site donate green if available; fallback to #0f6a3e */
+      --lc-primary: var(--color-green, #0f6a3e);
+      --lc-header-bg: #111827; /* gray-900 */
+      --lc-body-bg: #ffffff;
+      --lc-surface: #f9fafb; /* gray-50 */
+      --lc-muted: #e5e7eb; /* gray-200 */
+      --lc-text: #111827; /* gray-900 */
+      --lc-shadow: 0 8px 28px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.12);
+      --lc-radius: 8px;
+      --lc-gap: 8px;
+      --lc-transition: 180ms cubic-bezier(.2,.7,.2,1);
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      color: #111827;
+      min-height: 100vh;
+      background: #f5f7fb;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    .demo { text-align: center; max-width: 640px; }
+    .demo h1 { margin: 0 0 8px; font-weight: 700; }
+    .demo p { color: #4b5563; }
+
+    /* Floating Chat Button */
+    .lc-toggle {
+      position: fixed;
+      right: calc(16px + env(safe-area-inset-right));
+      bottom: calc(16px + env(safe-area-inset-bottom));
+      z-index: 9999;
+      width: 56px;
+      height: 56px;
+      border-radius: 9999px;
+      border: none;
+      background: var(--lc-primary);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font: 600 14px/1 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      box-shadow: var(--lc-shadow);
+      cursor: pointer;
+      transition: transform var(--lc-transition), box-shadow var(--lc-transition), background var(--lc-transition);
+    }
+    .lc-toggle:hover { transform: translateY(-1px); }
+    .lc-toggle:active { transform: translateY(0); }
+    .lc-toggle:focus-visible {
+      outline: 3px solid #93c5fd; /* blue-300 */
+      outline-offset: 2px;
+    }
+
+    /* Chat Panel */
+    .lc-panel {
+      position: fixed;
+      right: calc(16px + env(safe-area-inset-right));
+      bottom: calc(84px + env(safe-area-inset-bottom)); /* above the toggle */
+      z-index: 9999;
+      width: 360px;
+      max-width: calc(100vw - 24px);
+      background: var(--lc-body-bg);
+      border-radius: var(--lc-radius);
+      box-shadow: var(--lc-shadow);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(8px) scale(.98);
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity var(--lc-transition), transform var(--lc-transition), visibility 0s linear var(--lc-transition);
+    }
+    .lc-panel.is-open {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      visibility: visible;
+      pointer-events: auto;
+      transition: opacity var(--lc-transition), transform var(--lc-transition), visibility 0s;
+    }
+
+    .lc-header {
+      background: var(--lc-header-bg);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+    }
+    .lc-title { font: 600 15px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; margin: 0; }
+    .lc-close {
+      appearance: none;
+      border: none;
+      background: transparent;
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+    }
+    .lc-close:hover { background: rgba(255,255,255,0.08); }
+    .lc-close:focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
+
+    .lc-body { background: var(--lc-surface); display: grid; grid-template-rows: 1fr auto; }
+    .lc-messages { height: 300px; overflow-y: auto; padding: 12px; background: var(--lc-body-bg); }
+    .lc-row { display: flex; margin-bottom: 8px; }
+    .lc-row.user { justify-content: flex-end; }
+    .lc-row.bot { justify-content: flex-start; }
+    .lc-msg {
+      max-width: 85%;
+      padding: 8px 10px;
+      border-radius: 14px;
+      font: 14px/1.35 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+    }
+    .lc-msg.user { background: var(--lc-primary); color: #fff; border-bottom-right-radius: 4px; }
+    .lc-msg.bot { background: #f3f4f6; color: var(--lc-text); border-bottom-left-radius: 4px; }
+
+    /* Typing indicator */
+    .lc-msg.typing { background: #f3f4f6; color: transparent; position: relative; }
+    .lc-msg.typing .dots { display: inline-flex; gap: 4px; }
+    .lc-msg.typing .dot { width: 6px; height: 6px; border-radius: 50%; background: #9ca3af; opacity: .4; animation: lc-bounce 1s infinite ease-in-out; }
+    .lc-msg.typing .dot:nth-child(2) { animation-delay: .15s; }
+    .lc-msg.typing .dot:nth-child(3) { animation-delay: .3s; }
+    @keyframes lc-bounce { 0%, 80%, 100% { transform: translateY(0); opacity: .4; } 40% { transform: translateY(-3px); opacity: 1; } }
+
+    .lc-quick {
+      background: var(--lc-surface);
+      border-top: 1px solid var(--lc-muted);
+      padding: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .lc-quick button {
+      appearance: none;
+      border: 1px solid var(--lc-muted);
+      background: #fff;
+      border-radius: 8px;
+      padding: 8px 10px;
+      text-align: left;
+      cursor: pointer;
+      font: 500 13px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      color: var(--lc-text);
+      transition: background var(--lc-transition), border-color var(--lc-transition), transform var(--lc-transition);
+    }
+    .lc-quick button:hover { background: #f3f4f6; }
+    .lc-quick button:active { transform: translateY(1px); }
+    .lc-quick button:focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
+
+    @media (max-width: 420px) {
+      .lc-panel { width: calc(100vw - 24px); }
+      .lc-messages { height: min(50vh, 380px); }
+    }
+    @media (prefers-reduced-motion: reduce) { .lc-panel, .lc-toggle { transition: none; } }
+  </style>
+</head>
+<body>
+  <div class="demo" aria-hidden="false">
+    <h1>Live Chat Widget</h1>
+    <p>Click the “Chat” button in the bottom-right to open the panel.</p>
+  </div>
+
+  <!-- Live Chat Widget (Markup) -->
+  <div id="lc-panel" class="lc-panel" role="dialog" aria-modal="true" aria-labelledby="lc-title" aria-hidden="true">
+    <div class="lc-header">
+      <h2 class="lc-title" id="lc-title">Chat</h2>
+      <button type="button" class="lc-close" id="lc-close" aria-label="Close chat" title="Close chat">&#215;</button>
+    </div>
+    <div class="lc-body">
+      <div class="lc-messages" id="lc-messages" aria-live="polite" aria-atomic="false"></div>
+      <div class="lc-quick" id="lc-quick"></div>
+    </div>
+  </div>
+
+  <button id="lc-toggle" class="lc-toggle" aria-label="Open chat" aria-controls="lc-panel" aria-expanded="false" title="Open chat">Help?</button>
+
+  <!-- Live Chat Widget (Script) -->
+  <script>
+    // =========================
+    // config
+    // =========================
+    const LC_QA_ITEMS = [
+      { q: 'What are your support hours?', a: 'Our team is available Monday–Friday, 9am–6pm (local time).' },
+      { q: 'How can I contact sales?', a: 'Email sales@example.com and we will reply within 1 business day.' },
+      { q: 'Where can I track my order?', a: 'Visit the Orders page and enter your confirmation number to track.' },
+      { q: 'Do you offer refunds?', a: 'Yes — within 30 days. Please review our refund policy for details.' }
+    ];
+
+    (function() {
+      // =========================
+      // elements
+      // =========================
+      const panel = document.getElementById('lc-panel');
+      const toggleBtn = document.getElementById('lc-toggle');
+      const closeBtn = document.getElementById('lc-close');
+      const quick = document.getElementById('lc-quick');
+      const messages = document.getElementById('lc-messages');
+
+      let isOpen = false;
+      let lastFocused = null;
+
+      // =========================
+      // render
+      // =========================
+      function renderQuickButtons() {
+        quick.innerHTML = '';
+        LC_QA_ITEMS.forEach((item, idx) => {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.textContent = item.q;
+          b.setAttribute('data-index', String(idx));
+          b.addEventListener('click', () => handleQuestionClick(idx));
+          quick.appendChild(b);
+        });
+      }
+
+      function appendMessage(text, who) {
+        const row = document.createElement('div');
+        row.className = 'lc-row ' + (who === 'user' ? 'user' : 'bot');
+        const msg = document.createElement('div');
+        msg.className = 'lc-msg ' + (who === 'user' ? 'user' : 'bot');
+        msg.textContent = text;
+        row.appendChild(msg);
+        messages.appendChild(row);
+        messages.scrollTop = messages.scrollHeight;
+      }
+
+      // =========================
+      // handlers
+      // =========================
+      function handleQuestionClick(index) {
+        const item = LC_QA_ITEMS[index];
+        if (!item) return;
+        appendMessage(item.q, 'user');
+
+        // show typing indicator and reply after 0.5s
+        const typingRow = document.createElement('div');
+        typingRow.className = 'lc-row bot';
+        const typingMsg = document.createElement('div');
+        typingMsg.className = 'lc-msg bot typing';
+        const dots = document.createElement('span');
+        dots.className = 'dots';
+        dots.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+        typingMsg.appendChild(dots);
+        typingRow.appendChild(typingMsg);
+        messages.appendChild(typingRow);
+        messages.scrollTop = messages.scrollHeight;
+
+        setTimeout(() => {
+          typingRow.remove();
+          appendMessage(item.a, 'bot');
+        }, 500);
+      }
+
+      function getFocusable(root) {
+        return Array.prototype.slice.call(
+          root.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+        ).filter(el => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden'));
+      }
+
+      // =========================
+      // open/close
+      // =========================
+      function openPanel() {
+        if (isOpen) return;
+        isOpen = true;
+        lastFocused = document.activeElement;
+        panel.classList.add('is-open');
+        panel.setAttribute('aria-hidden', 'false');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        setTimeout(() => {
+          const f = getFocusable(panel);
+          (f[0] || closeBtn).focus();
+        }, 0);
+        document.addEventListener('keydown', handleKeydown, true);
+      }
+
+      function closePanel() {
+        if (!isOpen) return;
+        isOpen = false;
+        panel.classList.remove('is-open');
+        panel.setAttribute('aria-hidden', 'true');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        document.removeEventListener('keydown', handleKeydown, true);
+        if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+        else toggleBtn.focus();
+      }
+
+      function handleKeydown(e) {
+        if (!isOpen) return;
+        if (e.key === 'Escape') { e.preventDefault(); closePanel(); return; }
+        if (e.key === 'Tab') {
+          const focusables = getFocusable(panel);
+          if (!focusables.length) return;
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
+          const active = document.activeElement;
+          if (e.shiftKey) {
+            if (active === first || !panel.contains(active)) { e.preventDefault(); last.focus(); }
+          } else {
+            if (active === last || !panel.contains(active)) { e.preventDefault(); first.focus(); }
+          }
+        }
+      }
+
+      // wire up controls
+      toggleBtn.addEventListener('click', () => (isOpen ? closePanel() : openPanel()));
+      closeBtn.addEventListener('click', closePanel);
+
+      // init
+      renderQuickButtons();
+    })();
+  </script>
+</body>
+</html>

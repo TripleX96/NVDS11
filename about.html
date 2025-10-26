@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About NVDS – Creating Lasting Impact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="about-page">
+  <header class="site-header">
+    <div class="site-header__bar">
+      <a class="site-header__brand" href="index.html#home" data-content-href-key="nav.logoLink" aria-label="Go to homepage">
+        <div class="site-header__logo" data-image-slot="nav-logo">
+          <img
+            src="assets/nvds-logo.svg"
+            alt="Nepal Village Development Service logo"
+            data-slot-image
+            data-default-src="assets/nvds-logo.svg"
+          >
+        </div>
+        <span class="site-header__brand-text" data-content-key="nav.logoText">NVDS</span>
+      </a>
+      <div class="site-header__menu">
+        <button class="site-header__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav" data-nav-toggle>
+          <span class="site-header__toggle-lines" aria-hidden="true"></span>
+        </button>
+        <nav class="site-header__nav" id="primary-nav" aria-label="Primary">
+          <a href="index.html#home" data-content-key="nav.home" data-content-href-key="nav.homeLink">Home</a>
+          <a href="about.html" data-content-key="nav.about" data-content-href-key="nav.aboutLink" aria-current="page">About</a>
+          <a href="causes.html" data-content-key="nav.causes" data-content-href-key="nav.causesLink">Causes</a>
+          <a href="blog.html" data-content-key="nav.blog" data-content-href-key="nav.blogLink">Blog</a>
+          <a href="volunteer.html" data-content-key="nav.volunteer" data-content-href-key="nav.volunteerLink">Volunteer</a>
+          <a href="contact.html" data-content-key="nav.contact" data-content-href-key="nav.contactLink">Contact</a>
+        </nav>
+        <a class="site-header__cta" href="donate.html" data-content-key="nav.donate" data-content-href-key="nav.donateLink">Donate Now</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="about-hero" id="overview">
+      <div class="container about-hero__grid">
+        <div class="about-hero__intro">
+          <h1 class="about-hero__heading">
+            <span class="about-hero__heading-line about-hero__heading-line--accent" data-content-key="about.hero.headingLead">Creating a</span>
+            <span class="about-hero__heading-line" data-content-key="about.hero.headingEmphasis">Better Tomorrow</span>
+          </h1>
+        </div>
+        <div class="about-hero__story">
+          <h2 data-content-key="about.hero.storyTitle">Our History &amp; Goal.</h2>
+          <p data-content-key="about.hero.storyBody">
+            Founded in 2009, Nepal Village Development Society (NVDS) has been dedicated to uplifting rural communities through health awareness, education, and development programs. From reproductive health campaigns and HIV/AIDS awareness in Kavrepalanchok to COVID-19 relief efforts with vaccination drives and food distribution, we have always stood by vulnerable groups. Building on this foundation, our goal is to create healthier, self-reliant, and empowered communities by addressing poverty, malnutrition, and educational barriers through sustainable and inclusive programs.
+          </p>
+          <p data-content-key="about.hero.storyBodySecondary">
+            Across every initiative, we listen first, collaborate closely, and invest in long-term partnerships so that each program reflects the hopes and ambitions of the people we serve.
+          </p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="about-hero__image image-frame image-frame--banner" data-image-slot="about-hero-banner"></div>
+      </div>
+    </section>
+
+    <section class="about-impact" id="impact">
+      <div class="container about-impact__header">
+        <h2 data-content-key="about.impact.title">The meaningful ways we create lasting positive impact</h2>
+        <p data-content-key="about.impact.description">Every programme is rooted in community leadership, blending local wisdom with resources that ensure families thrive for generations.</p>
+      </div>
+      <div class="container about-impact__grid">
+        <div class="about-impact__media">
+          <div class="image-frame image-frame--portrait about-impact__primary" data-image-slot="about-impact-primary"></div>
+        </div>
+        <div class="about-impact__content">
+          <div class="about-impact__badge" data-content-key="about.impact.badge">Creating lasting change</div>
+          <h3 data-content-key="about.impact.cardTitle">Creating Lasting Change</h3>
+          <p data-content-key="about.impact.cardBody">
+            Our goal is to empower rural communities by improving health, education, and livelihoods while promoting renewable energy and environmental sustainability, building a future that is healthy, self-reliant, and resilient.
+          </p>
+          <a class="btn btn--ghost about-impact__button" href="donate.html" data-content-key="about.impact.cardButtonLabel" data-content-href-key="about.impact.cardButtonHref">Donate Now</a>
+          <div class="about-impact__gallery">
+            <div class="image-frame image-frame--square" data-image-slot="about-impact-secondary"></div>
+            <div class="image-frame image-frame--square" data-image-slot="about-impact-tertiary"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-cta" id="cta">
+      <div class="container about-cta__layout">
+        <div class="about-cta__media image-frame image-frame--panorama" data-image-slot="about-cta-backdrop"></div>
+        <div class="about-cta__card">
+          <div class="about-cta__logo">
+            <span class="about-cta__mark">NVDS</span>
+            <span data-content-key="about.cta.tagline">Join us in making a difference</span>
+          </div>
+          <h2 data-content-key="about.cta.title">Join us in making a difference</h2>
+          <p data-content-key="about.cta.description">
+            Your support can help change lives and transform communities. Whether through donations, volunteering, or spreading awareness, every action counts.
+          </p>
+          <a class="btn btn--primary about-cta__button" href="donate.html" data-content-key="about.cta.buttonLabel" data-content-href-key="about.cta.buttonHref">Join us Today</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-quote" id="mission">
+      <div class="container about-quote__inner">
+        <div class="about-quote__symbol" aria-hidden="true">“</div>
+        <blockquote class="about-quote__text" data-content-key="about.quote.text">
+          Our mission is to create a lasting impact by driving real change and improving lives.
+        </blockquote>
+        <cite class="about-quote__cite" data-content-key="about.quote.attribution">Nepal Village Development Society</cite>
+      </div>
+    </section>
+
+    <section class="about-pillars" id="pillars">
+      <div class="container about-pillars__header">
+        <h2 data-content-key="about.pillars.title">Our mission in action</h2>
+        <p data-content-key="about.pillars.description">
+          Guided by community leaders and local partners, we design initiatives that respond to immediate needs while building resilience for the future.
+        </p>
+      </div>
+      <div class="container about-pillars__grid">
+        <article class="about-pillars__card">
+          <div class="image-frame image-frame--landscape" data-image-slot="about-pillar-one"></div>
+          <div class="about-pillars__card-content">
+            <span class="about-pillars__index" data-content-key="about.pillars.card1.number">01</span>
+            <h3 data-content-key="about.pillars.card1.title">Enhance access to quality healthcare, education, and livelihood opportunities.</h3>
+            <p data-content-key="about.pillars.card1.description">
+              Ensuring rural communities become self-reliant, resilient, and capable of breaking the cycle of poverty.
+            </p>
+          </div>
+        </article>
+        <article class="about-pillars__card">
+          <div class="image-frame image-frame--landscape" data-image-slot="about-pillar-two"></div>
+          <div class="about-pillars__card-content">
+            <span class="about-pillars__index" data-content-key="about.pillars.card2.number">02</span>
+            <h3 data-content-key="about.pillars.card2.title">Drive initiatives in renewable energy, environmental conservation, and sustainable practices.</h3>
+            <p data-content-key="about.pillars.card2.description">
+              Protect natural resources while fostering long-term community development and climate resilience.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="contact">
+    <div class="container footer__grid">
+      <div class="footer__brand-block">
+        <div class="footer__brandline">
+          <div class="footer__mark" data-image-slot="nav-logo">
+            <img src="assets/nvds-logo.svg" alt="Nepal Village Development Service logo" data-slot-image data-default-src="assets/nvds-logo.svg">
+          </div>
+          <div class="footer__brand-name">NVDS</div>
+        </div>
+        <p class="footer__desc">We help organizations showcase their mission, accept donations seamlessly, &amp; engage supporters effectively.</p>
+        <div class="footer__socials">
+          <a class="footer__social" href="#" aria-label="Instagram" title="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.5a5.5 5.5 0 1 1 0 11.001 5.5 5.5 0 0 1 0-11zm0 2a3.5 3.5 0 1 0 .001 7.001A3.5 3.5 0 0 0 12 9.5zM18 6.4a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/></svg>
+          </a>
+          <a class="footer__social" href="#" aria-label="Facebook" title="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 10.5H16l.5-3h-3V6a1 1 0 0 1 1-1h2V2h-2.5A3.5 3.5 0 0 0 10 5.5V7.5H8v3h2v8h3.5v-8z"/></svg>
+          </a>
+          <a class="footer__social" href="#" aria-label="X" title="X">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l7.5 9.1L3.7 21H7l5-6.4L17.8 21H21l-8.1-9.8L20.4 3H17L12 8.9 7.2 3z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <nav class="footer__col" aria-label="Quick Links">
+        <h4>Quick Links</h4>
+        <ul class="footer__navlist">
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="causes.html">Our Causes</a></li>
+          <li><a href="volunteer.html">Volunteers</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__col" aria-label="Get Involved">
+        <h4>Get Involved</h4>
+        <ul class="footer__navlist">
+          <li><a href="donate.html">Donate</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="volunteer.html">Volunteer</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer__col">
+        <h4>Our Address</h4>
+        <ul class="footer__contact">
+          <li>
+            <span class="footer__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+            </span>
+            <div>New Baneshwor, Kathmandu, Nepal</div>
+          </li>
+          <li>
+            <span class="footer__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm-1.4 3L12 12.25 5.4 7h13.2z"/></svg>
+            </span>
+            <a href="mailto:nvdssoc@gmail.com">nvdssoc@gmail.com</a>
+          </li>
+          <li>
+            <span class="footer__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6.6 10.8a12.8 12.8 0 0 0 6.6 6.6l2.2-2.2c.2-.2.5-.3.8-.2 1 .3 2 .5 3 .5.4 0 .8.3.8.8V20c0 .4-.3.8-.8.8C9.8 20.8 3.2 14.2 3.2 6.8c0-.4.3-.8.8-.8H6c.4 0 .8.3.8.8 0 1 .2 2 .5 3 .1.3 0 .6-.2.8l-2.5 2.4z"/></svg>
+            </span>
+            <a href="tel:+9779841499048">+977-9841499048</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>&copy; <span id="year"></span> NVDS. All Rights Reserved</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
