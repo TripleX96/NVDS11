@@ -111,10 +111,13 @@
           <p data-content-key="blog.newsletter.description">
             Stay updated with quarterly highlights, volunteer opportunities, and ways to take action with NVDS.
           </p>
-          <form class="blog-newsletter__form">
+          <form class="blog-newsletter__form" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="1c5cb0ac-a882-4363-b0ac-1e89ed9fdc05">
+            <input type="hidden" name="subject" value="NVDS Blog newsletter subscription">
+            <input type="hidden" name="message" value="Please subscribe me to the NVDS newsletter.">
             <label>
               <span data-content-key="blog.newsletter.fieldLabel">Email address</span>
-              <input type="email" placeholder="you@example.com">
+              <input type="email" name="email" placeholder="you@example.com" required>
             </label>
             <button type="submit" class="btn btn--primary" data-content-key="blog.newsletter.buttonLabel">Subscribe</button>
           </form>

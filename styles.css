@@ -3176,3 +3176,30 @@ textarea:focus {
   }
 }
 
+/* Inline toast for form success (custom, centered) */
+.nvds-toast {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 9999;
+  pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+}
+.nvds-toast.is-hidden { opacity: 0; transform: translateY(-6px) scale(.98); visibility: hidden; }
+.nvds-toast__box {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 22px;
+  border-radius: var(--radius-large);
+  background: var(--color-mint-soft);
+  color: var(--color-green-dark);
+  border: 1px solid rgba(15, 106, 62, 0.2);
+  box-shadow: 0 28px 60px -34px rgba(10, 53, 29, 0.45);
+  font-weight: 600;
+  text-align: center;
+}
+.nvds-toast__icon { display: grid; place-items: center; width: 28px; height: 28px; }
+.nvds-toast__text { font-size: 16px; }

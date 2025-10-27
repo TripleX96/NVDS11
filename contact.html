@@ -83,22 +83,24 @@
             <span data-content-key="contact.form.highlight3">Request fundraising resources</span>
           </div>
         </div>
-        <form class="contact-form__fields">
+        <form class="contact-form__fields" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="1c5cb0ac-a882-4363-b0ac-1e89ed9fdc05">
+          <input type="hidden" name="subject" value="New message from NVDS contact form">
           <label>
             <span data-content-key="contact.form.nameLabel">Name</span>
-            <input type="text" placeholder="Your name" data-content-placeholder-key="contact.form.namePlaceholder">
+            <input type="text" name="name" placeholder="Your name" data-content-placeholder-key="contact.form.namePlaceholder" required>
           </label>
           <label>
             <span data-content-key="contact.form.emailLabel">Email</span>
-            <input type="email" placeholder="you@example.com" data-content-placeholder-key="contact.form.emailPlaceholder">
+            <input type="email" name="email" placeholder="you@example.com" data-content-placeholder-key="contact.form.emailPlaceholder" required>
           </label>
           <label>
             <span data-content-key="contact.form.phoneLabel">Phone</span>
-            <input type="tel" placeholder="+977..." data-content-placeholder-key="contact.form.phonePlaceholder">
+            <input type="tel" name="phone" placeholder="+977..." data-content-placeholder-key="contact.form.phonePlaceholder">
           </label>
           <label class="contact-form__textarea">
             <span data-content-key="contact.form.messageLabel">How can we help?</span>
-            <textarea rows="5" placeholder="Share your message" data-content-placeholder-key="contact.form.messagePlaceholder"></textarea>
+            <textarea rows="5" name="message" placeholder="Share your message" data-content-placeholder-key="contact.form.messagePlaceholder" required></textarea>
           </label>
           <button type="submit" class="btn btn--primary contact-form__submit" data-content-key="contact.form.buttonLabel">Send message</button>
         </form>

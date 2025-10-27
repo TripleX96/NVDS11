@@ -1,4 +1,13 @@
 ﻿const IMAGE_STORAGE_PREFIX = 'nvds_images_';
+  ,{
+    id: 'home-quote',
+    title: 'Homepage quote',
+    description: 'Edit the large testimonial quote and attribution.',
+    fields: [
+      { key: 'quote.text', label: 'Quote text', type: 'textarea' },
+      { key: 'quote.attribution', label: 'Attribution', type: 'text' },
+    ],
+  }
 const CONTENT_STORAGE_KEY = 'nvds_content';
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 
@@ -86,6 +95,8 @@ const DEFAULT_CONTENT = {
   'donate.title': 'Make a difference: Donate today',
   'donate.buttonLabel': 'Contribute',
   'footer.tagline': 'Driving community-led development throughout Nepal.',
+  'quote.text': '"NVDS has truly changed lives with their dedication and support. Their efforts have given hope to so many."',
+  'quote.attribution': '- Emily Carter, Volunteer Coordinator',
   'footer.navWork': 'Our work',
   'footer.navVolunteer': 'Volunteer',
   'footer.navStories': 'Stories',
@@ -970,8 +981,16 @@ const CONTENT_SECTIONS = [
     ],
     images: ['blog-hero-feature'],
   },
+  {
+    id: 'home-quote',
+    title: 'Homepage quote',
+    description: 'Edit the large testimonial quote and attribution.',
+    fields: [
+      { key: 'quote.text', label: 'Quote text', type: 'textarea' },
+      { key: 'quote.attribution', label: 'Attribution', type: 'text' },
+    ],
+  },
 ];
-
 const PAGE_GROUPS = [
   {
     id: 'dashboard',
@@ -1007,7 +1026,7 @@ const PAGE_GROUPS = [
       title: 'Content suggestion',
       body: 'Keep hero copy concise so the main message stays readable on smaller screens.',
     },
-    sections: ['hero', 'mission', 'causes', 'volunteer', 'why', 'stories', 'gallery', 'image-cards', 'donate'],
+        sections: ['hero', 'mission', 'causes', 'volunteer', 'why', 'stories', 'gallery', 'image-cards', 'donate', 'home-quote'],
   },
   {
     id: 'about',
@@ -2028,6 +2047,9 @@ async function optimizeImageFile(file, slotId) {
     });
   }
 }
+
+
+
 
 
 

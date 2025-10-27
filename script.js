@@ -1,4 +1,4 @@
-const IMAGE_STORAGE_PREFIX = 'nvds_images_';
+﻿const IMAGE_STORAGE_PREFIX = 'nvds_images_';
 const CONTENT_STORAGE_KEY = 'nvds_content';
 
 const DEFAULT_CONTENT = {
@@ -84,6 +84,8 @@ const DEFAULT_CONTENT = {
   'stories.card3.linkHref': 'blog-renewable-energy.html',
   'donate.title': 'Make a difference: Donate today',
   'donate.buttonLabel': 'Contribute',
+  'quote.text': '"NVDS has truly changed lives with their dedication and support. Their efforts have given hope to so many."',
+  'quote.attribution': '- Emily Carter, Volunteer Coordinator',
   'footer.tagline': 'Driving community-led development throughout Nepal.',
   'footer.navWork': 'Our work',
   'footer.navVolunteer': 'Volunteer',
@@ -726,6 +728,125 @@ document.addEventListener('DOMContentLoaded', async () => {
     year.textContent = new Date().getFullYear();
   }
 
+  // Intercept contact form submit to avoid redirect
+  const contactForm = document.querySelector('form.contact-form__fields');
+  if (contactForm) {
+    // Lightweight toast for success message
+    const ensureToast = () => {
+      let container = document.getElementById('nvds-toast');
+      if (!container) {
+        container = document.createElement('div');
+        container.id = 'nvds-toast';
+        container.className = 'nvds-toast is-hidden';
+        container.innerHTML = `
+          <div class="nvds-toast__box" role="status" aria-live="polite">
+            <span class="nvds-toast__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            </span>
+            <span class="nvds-toast__text">Thank you! We will contact you soon.</span>
+          </div>`;
+        document.body.appendChild(container);
+      }
+      return container;
+    };
+
+    const showSuccessToast = (text) => {
+      const container = ensureToast();
+      const textEl = container.querySelector('.nvds-toast__text');
+      if (textEl) textEl.textContent = text;
+      container.classList.remove('is-hidden');
+      // Auto-hide after a short delay
+      window.clearTimeout(container.__hideTimer);
+      container.__hideTimer = window.setTimeout(() => {
+        container.classList.add('is-hidden');
+      }, 3200);
+    };
+
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+      try {
+        const formData = new FormData(contactForm);
+        const endpoint = contactForm.getAttribute('action') || 'https://api.web3forms.com/submit';
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: formData
+        });
+        const result = await response.json().catch(() => ({}));
+        if (response.ok && (result.success === undefined || result.success === true)) {
+          showSuccessToast('Thank you! We will contact you soon.');
+          contactForm.reset();
+        } else {
+          alert('Sorry, there was a problem sending your message. Please try again.');
+        }
+      } catch (err) {
+        alert('Network error. Please try again later.');
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    });
+  }
+
+  // Intercept blog newsletter form to avoid redirect and show same toast
+  const newsletterForm = document.querySelector('form.blog-newsletter__form');
+  if (newsletterForm) {
+    const ensureToast = () => {
+      let container = document.getElementById('nvds-toast');
+      if (!container) {
+        container = document.createElement('div');
+        container.id = 'nvds-toast';
+        container.className = 'nvds-toast is-hidden';
+        container.innerHTML = `
+          <div class="nvds-toast__box" role="status" aria-live="polite">
+            <span class="nvds-toast__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            </span>
+            <span class="nvds-toast__text">Thank you! We will contact you soon.</span>
+          </div>`;
+        document.body.appendChild(container);
+      }
+      return container;
+    };
+    const showSuccessToast = (text) => {
+      const container = ensureToast();
+      const textEl = container.querySelector('.nvds-toast__text');
+      if (textEl) textEl.textContent = text;
+      container.classList.remove('is-hidden');
+      window.clearTimeout(container.__hideTimer);
+      container.__hideTimer = window.setTimeout(() => {
+        container.classList.add('is-hidden');
+      }, 3200);
+    };
+
+    newsletterForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = newsletterForm.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+      try {
+        const formData = new FormData(newsletterForm);
+        const endpoint = newsletterForm.getAttribute('action') || 'https://api.web3forms.com/submit';
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: formData
+        });
+        const result = await response.json().catch(() => ({}));
+        if (response.ok && (result.success === undefined || result.success === true)) {
+          showSuccessToast('Thank you! We will contact you soon.');
+          newsletterForm.reset();
+        } else {
+          alert('Sorry, there was a problem. Please try again.');
+        }
+      } catch (err) {
+        alert('Network error. Please try again later.');
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    });
+  }
+
   window.addEventListener('storage', (event) => {
     if (!event.key) return;
     if (event.key === CONTENT_STORAGE_KEY) {
@@ -1236,3 +1357,4 @@ function lcGetQA() {
     initCounts();
   }
 })();
+
