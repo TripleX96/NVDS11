@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -16,7 +16,18 @@
         <span class="admin-sidebar__logo">NVDS</span>
         <p class="admin-sidebar__subtitle">Site Admin</p>
       </div>
-      <nav class="admin-sidebar__nav" id="page-nav"></nav>
+      <nav class="admin-sidebar__nav" id="page-nav">
+        <!-- Fallback static nav; replaced by admin.js if it loads -->
+        <a class="admin-nav__item" href="#dashboard" data-page-id="dashboard" onclick="if(window.activatePage){activatePage('dashboard'); return false;}">Dashboard</a>
+        <a class="admin-nav__item" href="#global" data-page-id="global" onclick="if(window.activatePage){activatePage('global'); return false;}">Global elements</a>
+        <a class="admin-nav__item" href="#home" data-page-id="home" onclick="if(window.activatePage){activatePage('home'); return false;}">Home page</a>
+        <a class="admin-nav__item" href="#about" data-page-id="about" onclick="if(window.activatePage){activatePage('about'); return false;}">About page</a>
+        <a class="admin-nav__item" href="#causes" data-page-id="causes" onclick="if(window.activatePage){activatePage('causes'); return false;}">Causes page</a>
+        <a class="admin-nav__item" href="#blog" data-page-id="blog" onclick="if(window.activatePage){activatePage('blog'); return false;}">Blog page</a>
+        <a class="admin-nav__item" href="#contact" data-page-id="contact" onclick="if(window.activatePage){activatePage('contact'); return false;}">Contact page</a>
+        <a class="admin-nav__item" href="#volunteer" data-page-id="volunteer" onclick="if(window.activatePage){activatePage('volunteer'); return false;}">Volunteer page</a>
+        <a class="admin-nav__item" href="#donate" data-page-id="donate" onclick="if(window.activatePage){activatePage('donate'); return false;}">Donate page</a>
+      </nav>
       <div class="admin-sidebar__footer">
         <a href="index.html" class="admin-sidebar__link">← Back to site</a>
       </div>
@@ -225,4 +236,7 @@
   </script>
 </body>
 </html>
+
+
+
 

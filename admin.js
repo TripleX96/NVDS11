@@ -1,13 +1,4 @@
-﻿const IMAGE_STORAGE_PREFIX = 'nvds_images_';
-  ,{
-    id: 'home-quote',
-    title: 'Homepage quote',
-    description: 'Edit the large testimonial quote and attribution.',
-    fields: [
-      { key: 'quote.text', label: 'Quote text', type: 'textarea' },
-      { key: 'quote.attribution', label: 'Attribution', type: 'text' },
-    ],
-  }
+const IMAGE_STORAGE_PREFIX = 'nvds_images_';
 const CONTENT_STORAGE_KEY = 'nvds_content';
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 
@@ -1370,6 +1361,14 @@ const imageSlotLookup = new Map(IMAGE_SLOTS.map((slot) => [slot.id, slot]));
 const sectionLookup = new Map(CONTENT_SECTIONS.map((section) => [section.id, section]));
 const pageLookup = new Map(PAGE_GROUPS.map((page) => [page.id, page]));
 
+function getPageIdFromHash() {
+  try {
+    const h = (location.hash || '').replace('#', '').trim();
+    if (h && pageLookup.has(h)) return h;
+  } catch {}
+  return null;
+}
+
 let contentState = {};
 const fieldElements = new Map();
 const sectionStatus = new Map();
@@ -1823,6 +1822,9 @@ function activatePage(pageId) {
   refreshActivePageBadge();
 }
 
+// Expose for fallback inline links
+try { window.activatePage = activatePage; } catch(_) {}
+
 function updatePreview(preview, dataUrl) {
   const frame = preview.querySelector('.image-frame');
   if (dataUrl) {
@@ -1921,9 +1923,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   contentState = { ...DEFAULT_CONTENT, ...readStoredContent() };
 
+  // If a hash is present and matches a known page, activate it first
+  const fromHash = getPageIdFromHash();
+  if (fromHash) activePage = fromHash;
+
   renderNavigation();
   renderDashboard();
   activatePage(activePage);
+
+  // Keep page selection in sync with the URL hash
+  window.addEventListener('hashchange', () => {
+    const pid = getPageIdFromHash();
+    if (pid && pid !== activePage) {
+      activatePage(pid);
+    }
+  });
 
   window.addEventListener('storage', (event) => {
     if (!event.key) return;
