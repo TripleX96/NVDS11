@@ -65,6 +65,44 @@
       </div>
     </section>
 
+    <!-- Contact section replicated for volunteer page -->
+    <section class="contact-form" id="volunteer-message">
+      <div class="container contact-form__grid">
+        <div class="contact-form__content">
+          <h2>Send us a message</h2>
+          <p>
+            Share a few details and our team will respond within two working days. We're grateful for your interest in powering rural-led development.
+          </p>
+          <div class="contact-form__highlights">
+            <span>Collaborate on community programmes</span>
+            <span>Plan a visit to project sites</span>
+            <span>Request fundraising resources</span>
+          </div>
+        </div>
+        <form class="contact-form__fields" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="1c5cb0ac-a882-4363-b0ac-1e89ed9fdc05">
+          <input type="hidden" name="subject" value="New message from NVDS Volunteer page">
+          <label>
+            <span>Name</span>
+            <input type="text" name="name" placeholder="Your name" required>
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" placeholder="you@example.com" required>
+          </label>
+          <label>
+            <span>Phone</span>
+            <input type="tel" name="phone" placeholder="+977...">
+          </label>
+          <label class="contact-form__textarea">
+            <span>How can we help?</span>
+            <textarea rows="5" name="message" placeholder="Share your message" required></textarea>
+          </label>
+          <button type="submit" class="btn btn--primary contact-form__submit">Send message</button>
+        </form>
+      </div>
+    </section>
+
     <section class="volunteer-steps" id="steps">
       <div class="container volunteer-steps__header">
         <h2 data-content-key="volunteerPage.steps.title">Your volunteer journey in three stages</h2>
@@ -126,6 +164,7 @@
         </div>
       </div>
     </section>
+
   </main>
 
   <footer class="footer" id="site-footer">

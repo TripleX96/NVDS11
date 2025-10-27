@@ -2669,6 +2669,27 @@ textarea:focus {
   justify-self: flex-start;
 }
 
+/* File input styling for donate form */
+.donate-form__fields input[type='file'] {
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 10px;
+  background: #fff;
+}
+.donate-form__fields input[type='file']::file-selector-button {
+  border: 1px solid var(--color-green);
+  background: var(--color-green);
+  color: #fff;
+  border-radius: 999px;
+  padding: 8px 14px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+/* Custom file upload control to hide default "No file chosen" */
+.file-upload { display: inline-flex; align-items: center; gap: 10px; }
+.file-upload [data-file-names] { color: var(--color-muted); font-size: 14px; }
+
 @media (prefers-reduced-motion: reduce) {
   .hero__badge,
   .hero__headline,
@@ -3175,6 +3196,9 @@ textarea:focus {
     display:none!important;
   }
 }
+
+/* Hide donate options grid on donate page */
+.donate-page .donate-options { display: none !important; }
 
 /* Inline toast for form success (custom, centered) */
 .nvds-toast {

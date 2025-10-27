@@ -847,6 +847,80 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
+  // Intercept donate form (with file upload) to avoid redirect
+  const donateForm = document.querySelector('form.donate-form__fields');
+  if (donateForm) {
+    const ensureToast = () => {
+      let container = document.getElementById('nvds-toast');
+      if (!container) {
+        container = document.createElement('div');
+        container.id = 'nvds-toast';
+        container.className = 'nvds-toast is-hidden';
+        container.innerHTML = `
+          <div class="nvds-toast__box" role="status" aria-live="polite">
+            <span class="nvds-toast__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            </span>
+            <span class="nvds-toast__text">Thank you! We will contact you soon.</span>
+          </div>`;
+        document.body.appendChild(container);
+      }
+      return container;
+    };
+    const showSuccessToast = (text) => {
+      const container = ensureToast();
+      const textEl = container.querySelector('.nvds-toast__text');
+      if (textEl) textEl.textContent = text;
+      container.classList.remove('is-hidden');
+      window.clearTimeout(container.__hideTimer);
+      container.__hideTimer = window.setTimeout(() => {
+        container.classList.add('is-hidden');
+      }, 3200);
+    };
+
+    // Custom file button wiring
+    const fileBtn = donateForm.querySelector('[data-file-trigger]');
+    const fileInput = donateForm.querySelector('input[type="file"]');
+    const fileNames = donateForm.querySelector('[data-file-names]');
+    if (fileBtn && fileInput) {
+      fileBtn.addEventListener('click', () => fileInput.click());
+      fileInput.addEventListener('change', () => {
+        if (!fileInput.files || fileInput.files.length === 0) {
+          if (fileNames) fileNames.textContent = '';
+        } else {
+          const names = Array.from(fileInput.files).map(f => f.name).join(', ');
+          if (fileNames) fileNames.textContent = names;
+        }
+      });
+    }
+
+    donateForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = donateForm.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+      try {
+        const formData = new FormData(donateForm);
+        const endpoint = donateForm.getAttribute('action') || 'https://api.web3forms.com/submit';
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: formData
+        });
+        const result = await response.json().catch(() => ({}));
+        if (response.ok && (result.success === undefined || result.success === true)) {
+          showSuccessToast('Thanks! Your pledge has been submitted.');
+          donateForm.reset();
+        } else {
+          alert('Sorry, there was a problem submitting your pledge. Please try again.');
+        }
+      } catch (err) {
+        alert('Network error. Please try again later.');
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    });
+  }
+
   window.addEventListener('storage', (event) => {
     if (!event.key) return;
     if (event.key === CONTENT_STORAGE_KEY) {
