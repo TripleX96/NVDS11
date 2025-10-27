@@ -10,7 +10,24 @@
   <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-  <div class="admin-shell">
+  <div id="admin-login" class="admin-login" aria-modal="true" role="dialog" hidden>
+    <form class="admin-login__card" id="admin-login-form">
+      <h1 class="admin-login__title">Admin Login</h1>
+      <p class="admin-login__hint">Enter username and password to continue.</p>
+      <label class="admin-login__field">
+        <span>Username</span>
+        <input id="admin-username" type="text" autocomplete="username" required placeholder="Username">
+      </label>
+      <label class="admin-login__field">
+        <span>Password</span>
+        <input id="admin-password" type="password" autocomplete="current-password" required placeholder="Password">
+      </label>
+      <p class="admin-login__error" id="admin-login-error" aria-live="polite"></p>
+      <button type="submit" class="btn btn--primary" style="width:100%">Login</button>
+    </form>
+  </div>
+
+  <div class="admin-shell" id="admin-shell" hidden>
     <aside class="admin-sidebar" aria-label="Dashboard navigation">
       <div class="admin-sidebar__brand">
         <span class="admin-sidebar__logo">NVDS</span>
@@ -232,6 +249,44 @@
       } else {
         initChatAdmin();
       }
+    })();
+  </script>
+  <script>
+    // Simple front-end gate for the admin panel
+    (function () {
+      try {
+        var authed = sessionStorage.getItem('nvds_admin_auth') === 'ok';
+        var shell = document.getElementById('admin-shell');
+        var gate = document.getElementById('admin-login');
+        var form = document.getElementById('admin-login-form');
+        var err = document.getElementById('admin-login-error');
+        function openGate() {
+          if (gate) gate.hidden = false;
+          if (shell) shell.hidden = true;
+        }
+        function closeGate() {
+          if (gate) gate.remove();
+          if (shell) shell.hidden = false;
+        }
+        if (authed) {
+          closeGate();
+        } else {
+          openGate();
+        }
+        if (form) {
+          form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var u = (document.getElementById('admin-username') || {}).value || '';
+            var p = (document.getElementById('admin-password') || {}).value || '';
+            if (u.trim() === 'Pujan' && p.trim() === 'Pujan') {
+              sessionStorage.setItem('nvds_admin_auth', 'ok');
+              closeGate();
+            } else if (err) {
+              err.textContent = 'Invalid credentials';
+            }
+          });
+        }
+      } catch (_) {}
     })();
   </script>
 </body>

@@ -13,7 +13,7 @@
   --radius-medium: 18px;
   --radius-small: 12px;
   /* Navbar and hero spacing */
-  --nav-top-gap: 0px;         /* remove space above navbar */
+  --nav-top-gap: 15px;        /* space above navbar */
   --nav-bottom-gap: 45px;     /* space between navbar and hero */
   font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
@@ -77,8 +77,8 @@ a {
   gap: clamp(12px, 4vw, 28px);
   padding: clamp(10px, 3vw, 16px) clamp(24px, 6vw, 30px);
   border-radius: 16px;
-  /* keep subtle mint tint but remove whitish cast */
-  background: linear-gradient(135deg, rgba(223, 241, 218, 0.88), rgba(209, 236, 218, 0.86));
+  /* match hero background color */
+  background: var(--color-mint-soft);
   color: var(--color-green-dark);
   box-shadow: 0 28px 48px -32px rgba(10, 53, 29, 0.25);
   border: 1px solid rgba(15, 106, 62, 0.08);
