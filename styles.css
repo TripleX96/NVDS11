@@ -133,6 +133,8 @@ a {
   display: flex;
   align-items: center;
   gap: clamp(8px, 2.5vw, 18px);
+  flex: 1 1 auto;            /* allow nav to expand */
+  justify-content: center;   /* center links in the bar */
 }
 
 .site-header__nav a {
@@ -895,9 +897,10 @@ header.hero { margin-top: 0; }
 
 .mission__text h2,
 .volunteer__text h2,
-.donate__form h2 {
-  text-align: left;
-}
+.donate__form h2 { text-align: left; }
+/* Center align copy and CTA in home donate block */
+.donate__form { text-align: center; }
+.donate__form h2 { text-align: center; }
 
 .volunteer {
   background: #fff;
