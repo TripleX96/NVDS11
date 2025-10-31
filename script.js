@@ -1,5 +1,8 @@
 ﻿const IMAGE_STORAGE_PREFIX = 'nvds_images_';
 const CONTENT_STORAGE_KEY = 'nvds_content';
+// Default image used when no image has been set via Admin yet
+// (e.g., first load on GitHub Pages fresh origin).
+const DEFAULT_FALLBACK_IMAGE = 'assets/hero-terraces.svg';
 
 const DEFAULT_CONTENT = {
   'nav.logoText': 'NVDS',
@@ -420,9 +423,21 @@ function loadStoredImages() {
               if (fromIdb) { applyImageToElement(slot, fromIdb); return; }
             } catch {}
           }
-          applyImageToElement(slot, null);
+          // Nothing stored for this slot: apply a safe default so
+          // visitors don't see the grey placeholder overlay.
+          if ((slot.dataset.imageSlot || '') === 'nav-logo') {
+            applyImageToElement(slot, null);
+          } else {
+            applyImageToElement(slot, DEFAULT_FALLBACK_IMAGE);
+          }
         })
-        .catch(() => applyImageToElement(slot, null));
+        .catch(() => {
+          if ((slot.dataset.imageSlot || '') === 'nav-logo') {
+            applyImageToElement(slot, null);
+          } else {
+            applyImageToElement(slot, DEFAULT_FALLBACK_IMAGE);
+          }
+        });
     } else {
       applyImageToElement(slot, stored);
     }
@@ -960,7 +975,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (event.newValue === '__IDB__' || event.newValue === null) {
         idbGetImage(slotId)
           .then((data) => applyImageToElement(element, data || null))
-          .catch(() => applyImageToElement(element, null));
+          .catch(() => {
+            if ((slotId || '') === 'nav-logo') {
+              applyImageToElement(element, null);
+            } else {
+              applyImageToElement(element, DEFAULT_FALLBACK_IMAGE);
+            }
+          });
       } else {
         applyImageToElement(element, event.newValue);
       }
