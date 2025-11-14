@@ -352,11 +352,19 @@ function applyImageToElement(element, dataUrl) {
   if (!element) return;
 
   const isImgElement = element.tagName === 'IMG';
+  const isFaviconLink = element.tagName === 'LINK' && typeof element.rel === 'string' && element.rel.includes('icon');
   const nestedImage = isImgElement ? element : element.querySelector('[data-slot-image]');
   const defaultSrc = nestedImage?.dataset.defaultSrc;
   const hasBackgroundTarget = !nestedImage || isImgElement;
+  const fallbackHref = isFaviconLink ? element.dataset.defaultSrc : null;
 
   if (dataUrl) {
+    if (isFaviconLink) {
+      element.href = dataUrl;
+      element.type = 'image/png';
+      element.classList.remove('is-empty');
+      return;
+    }
     if (nestedImage) {
       nestedImage.src = dataUrl;
       nestedImage.hidden = false;
@@ -382,6 +390,18 @@ function applyImageToElement(element, dataUrl) {
     }
   } else {
     element.classList.add('is-empty');
+  }
+
+  if (isFaviconLink) {
+    if (fallbackHref) {
+      element.href = fallbackHref;
+      element.type = 'image/png';
+      element.classList.remove('is-empty');
+    } else {
+      element.removeAttribute('href');
+      element.classList.add('is-empty');
+    }
+    return;
   }
 
   element.style.removeProperty('background-image');

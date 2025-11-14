@@ -375,6 +375,13 @@ const CONTENT_SECTIONS = [
     images: ['nav-logo'],
   },
   {
+    id: 'favicon',
+    title: 'Site favicon',
+    description: 'Upload the PNG icon used in the browser tab.',
+    fields: [],
+    images: ['site-favicon'],
+  },
+  {
     id: 'chat',
     title: 'Chat assistant',
     description: 'Manage the chat button, prompts, and confirmation message.',
@@ -1005,7 +1012,7 @@ const PAGE_GROUPS = [
       title: 'Tip',
       body: 'Check external links after updating to ensure each destination opens in a new tab if needed.',
     },
-    sections: ['navigation', 'chat', 'footer'],
+    sections: ['navigation', 'favicon', 'chat', 'footer'],
   },
   {
     id: 'home',
@@ -1098,7 +1105,13 @@ const IMAGE_SLOTS = [
     id: 'nav-logo',
     label: 'Header logo',
     note: 'Square logo shown in the top navigation.',
-    sizeHint: 'Square (min 96 Ã- 96)',
+    sizeHint: 'Square (min 96 x 96)',
+  },
+  {
+    id: 'site-favicon',
+    label: 'Site favicon',
+    note: 'PNG icon used in the browser tab.',
+    sizeHint: 'Square (min 96 x 96)',
   },
   {
     id: 'hero-primary',
@@ -2061,6 +2074,7 @@ async function optimizeImageFile(file, slotId) {
     });
   }
 }
+
 
 
 
