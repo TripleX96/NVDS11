@@ -780,6 +780,121 @@ p {
   gap: clamp(40px, 7vw, 88px);
 }
 
+@media (min-width: 821px) {
+  .hero__inner {
+    padding-right: max(24px, calc((100vw - var(--container-width)) / 2));
+  }
+}
+
+@media (min-width: 821px) and (max-width: 966px) {
+  .site-header__bar {
+    padding: clamp(10px, 2vw, 14px) clamp(18px, 4vw, 24px);
+    gap: clamp(10px, 2.4vw, 18px);
+    position: relative;
+  }
+
+  .site-header__menu {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 2vw, 16px);
+    margin-left: auto;
+    flex: 0 0 auto;
+  }
+
+  .site-header__nav {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: clamp(18px, 4vw, 24px);
+    left: clamp(18px, 4vw, 24px);
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px;
+    background: linear-gradient(135deg, rgba(247, 252, 245, 0.98), rgba(223, 241, 218, 0.96));
+    border: 1px solid rgba(15, 106, 62, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 24px 48px -24px rgba(10, 53, 29, 0.3);
+    z-index: 200;
+  }
+
+  .site-header.is-nav-open .site-header__nav {
+    display: flex;
+  }
+
+  .site-header__nav a {
+    flex: 0 0 auto;
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(15, 106, 62, 0.15);
+    box-shadow: 0 18px 40px -26px rgba(10, 53, 29, 0.35);
+    font-weight: 600;
+  }
+
+  .site-header__nav a:hover,
+  .site-header__nav a:focus-visible {
+    color: var(--color-green-dark);
+    background: rgba(15, 106, 62, 0.1);
+    transform: none;
+  }
+
+  .site-header__nav a[aria-current='page'] {
+    background: rgba(15, 106, 62, 0.2);
+    color: var(--color-green-dark);
+  }
+
+  .site-header__nav-cta {
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 12px 20px;
+    font-weight: 600;
+    border: 1px solid rgba(15, 106, 62, 0.16);
+    background: linear-gradient(135deg, #0f6a3e, #0a4b2b);
+    color: #fff;
+    box-shadow: 0 20px 36px -24px rgba(15, 106, 62, 0.6);
+  }
+
+  .site-header__toggle {
+    display: inline-flex;
+    order: 2;
+  }
+
+  .site-header__cta {
+    order: 1;
+    margin-left: 0;
+    padding: 8px 20px;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .hero__inner {
+    gap: clamp(28px, 5vw, 52px);
+  }
+
+  .hero__text {
+    max-width: 600px;
+  }
+
+  .hero__media {
+    padding: clamp(14px, 4vw, 28px);
+    justify-content: center;
+  }
+
+  .hero__media-primary {
+    width: clamp(340px, 42vw, 480px);
+  }
+
+  .hero__media-secondary {
+    left: clamp(2%, 5vw, 64px);
+    width: clamp(180px, 28vw, 260px);
+  }
+}
+
 /* pull hero closer to the navbar to remove the perceived large gap */
 header.hero { margin-top: 0; }
 
@@ -806,7 +921,7 @@ header.hero { margin-top: 0; }
 }
 
 .hero__text h1 {
-  font-size: clamp(42px, 5.6vw, 74px);
+  font-size: clamp(32px, 6vw, 74px); /* allow headline to shrink on narrow screens to prevent overflow */
   margin: 0 0 24px; /* strip default top margin so hero doesn't push down */
   line-height: 1.04;
 }
@@ -837,7 +952,7 @@ header.hero { margin-top: 0; }
 }
 
 .hero__text p {
-  font-size: 18px;
+  font-size: clamp(16px, 4vw, 18px); /* keep paragraph legible without forcing oversized text on phones */
   color: rgba(30, 27, 22, 0.82);
 }
 
@@ -859,6 +974,10 @@ header.hero { margin-top: 0; }
   border: 1px solid rgba(12, 56, 32, 0.12);
   border-radius: 16px;
   box-shadow: 0 16px 30px -20px rgba(15, 106, 62, 0.28);
+  width: 100%;                    /* let stats stretch across the available space */
+  max-width: 640px;                /* but keep it from looking too wide on tablets */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero__stat { display: grid; gap: 2px; align-content: start; }
@@ -959,6 +1078,21 @@ header.hero { margin-top: 0; }
 /* Center align copy and CTA in home donate block */
 .donate__form { text-align: center; }
 .donate__form h2 { text-align: center; }
+
+@media (max-width: 655px) {
+  .mission__inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .mission__image {
+    order: -1;
+  }
+
+  .mission__text {
+    order: 0;
+  }
+}
 
 .volunteer {
   background: #fff;
@@ -2775,7 +2909,7 @@ textarea:focus {
 
 @media (max-width: 820px) {
   .hero {
-    padding: clamp(100px, 24vw, 140px) 0 clamp(64px, 18vw, 104px);
+    padding: clamp(56px, 14vw, 96px) clamp(16px, 5vw, 32px) clamp(48px, 12vw, 80px); /* tighter spacing on tablets/large phones */
   }
 
   .hero::after {
@@ -2789,29 +2923,59 @@ textarea:focus {
 
   .hero__inner {
     grid-template-columns: 1fr;
-    align-items: start;
-    gap: clamp(32px, 10vw, 56px);
+    align-items: center;
+    gap: clamp(32px, 8vw, 48px);
+    max-width: 720px;
+    margin: 0 auto;
   }
 
   .hero__text {
-    max-width: none;
+    max-width: 600px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .hero__actions {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero__actions .btn {
+    flex: 1 1 200px;
+    min-width: 180px;
+    justify-content: center;
+  }
+
+  .hero__stats {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   }
 
   .hero__media {
-    width: 100%;
-    min-height: clamp(360px, 78vw, 600px);
+    width: min(520px, 100%);
+    min-height: 0;
     justify-content: center;
     flex-direction: column;
-    gap: clamp(18px, 8vw, 28px);
+    gap: clamp(18px, 6vw, 24px);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding: clamp(12px, 4vw, 28px);
   }
 
   .hero__media-primary {
-    width: min(360px, 88%);
+    width: 100%;
+    max-width: 520px;
+    aspect-ratio: 4 / 3;
+    margin-left: 0;
   }
 
   .hero__media-secondary {
-    width: min(320px, 80%);
+    position: relative;
+    width: clamp(140px, 32vw, 180px);
     transform: none;
+    order: -1;
+    margin-bottom: -36px;
+    z-index: 3;
   }
 
   .about-hero {
@@ -3050,6 +3214,41 @@ textarea:focus {
   }
 }
 
+@media (min-width: 520px) and (max-width: 600px) {
+  .hero__actions {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 16px;
+    margin-top: 30px;
+  }
+
+  .hero__actions .btn {
+    flex: none;
+    width: min(420px, 100%);
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .hero__stats {
+    margin-top: 26px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 700px) {
+  .hero__actions {
+    justify-content: flex-start;
+    width: auto;
+    margin-top: 28px;
+    gap: 14px;
+  }
+
+  .hero__actions .btn {
+    flex: 0 0 auto;
+    min-width: 0;
+  }
+}
+
 @media (max-width: 520px) {
   .site-header__bar {
     padding: 14px clamp(16px, 6vw, 24px);
@@ -3072,26 +3271,44 @@ textarea:focus {
     background: radial-gradient(50% 50% at 50% 50%, rgba(15, 106, 62, 0.16), rgba(15, 106, 62, 0) 70%);
   }
 
-  /* Ensure hero media is removed on smaller phones as well */
-  .hero__media,
-  .hero__media-primary,
-  .hero__media-secondary {
-    display: none !important;
+  .hero__text {
+    text-align: center;
   }
+
+  .hero__actions {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .hero__actions .btn {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 0;
+    padding: 12px 22px;
+  }
+
+  .hero__stats {
+    padding: 16px;
+  }
+
   .hero__media {
-    min-height: clamp(300px, 108vw, 520px);
-    gap: clamp(14px, 12vw, 24px);
-    /* Extra right padding for ~390px devices */
-    padding-right: clamp(26px, 10vw, 56px);
+    width: 100%;
+    min-height: clamp(280px, 100vw, 440px);
+    gap: clamp(12px, 10vw, 22px);
+    padding: clamp(10px, 8vw, 20px);
   }
 
   .hero__media-primary {
-    width: min(300px, 92%);
-    margin: 0 auto; /* keep centered on very small screens */
+    width: 100%;
+    margin: 0 auto;
   }
 
   .hero__media-secondary {
-    width: min(280px, 88%);
+    width: clamp(120px, 42vw, 160px);
+    margin-bottom: -24px;
   }
 
   .chat-widget__panel {
@@ -3139,53 +3356,146 @@ textarea:focus {
   }
 }
 
-/* Tablet-specific overrides (iPad widths) to keep hero layout intact */
-@media (min-width: 700px) and (max-width: 820px) {
+@media (max-width: 810px) {
+  /* Remove hero imagery entirely at tablet/large-phone sizes per request */
+  .hero__media,
+  .hero__media-primary,
+  .hero__media-secondary {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: clamp(44px, 12vw, 68px) clamp(16px, 6vw, 24px) clamp(32px, 10vw, 52px); /* reduce vertical whitespace on mobile/tablet */
+  }
+
   .hero__inner {
-    grid-template-columns: minmax(320px, 1.1fr) minmax(320px, 1fr);
-    gap: clamp(32px, 6vw, 72px);
-    align-items: center;
+    gap: clamp(24px, 9vw, 36px);
   }
 
   .hero__text {
-    max-width: 720px;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+  }
+
+  .hero__badge {
+    align-self: center;
+  }
+
+  .hero__headline {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero__actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    justify-content: center;
+  }
+
+  .hero__stats {
+    width: 100%;
+    max-width: 520px;
+    margin-top: 18px;
+    padding: 12px 16px;
+    gap: 10px;
+  }
+
+  .hero__stat {
+    text-align: center;
+  }
+}
+
+/* Tablet-specific overrides (iPad widths) to match single-column hero mock */
+@media (min-width: 700px) and (max-width: 820px) {
+  .hero {
+    padding: clamp(72px, 14vw, 110px) clamp(24px, 7vw, 48px) clamp(64px, 12vw, 96px);
+  }
+
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap: clamp(28px, 6vw, 44px);
+    max-width: 640px;
+    margin-inline: auto;
+  }
+
+  .hero__text {
+    max-width: 560px;
+    text-align: center;
+    align-items: center;
+    margin-inline: auto;
+  }
+
+  .hero__headline {
+    gap: 8px;
+    position: relative;
+    padding-bottom: 18px;
+  }
+
+  .hero__headline::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: min(360px, 80%);
+    height: 5px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #c6621c, #f1a541);
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 18px;
+    margin-top: 32px;
+  }
+
+  .hero__actions .btn {
+    flex: none;
+    width: min(420px, 100%);
+    min-width: 0;
+    justify-content: center;
   }
 
   .hero__media {
-    position: relative;
-    display: grid;
-    place-items: center;
-    min-height: clamp(420px, 54vw, 640px);
+    display: none;
   }
 
-  /* Tablet hero layout keeps the overlapping small image */
-  .hero__media-primary {
-    width: clamp(360px, 52vw, 560px);
-    margin-left: auto;
-  }
-
-  .hero__media-secondary {
-    position: absolute;
-    display: block;
-    top: 50%;
-    left: clamp(4%, 7vw, 80px);
-    transform: translateY(-50%);
-    width: clamp(200px, 32vw, 320px);
-    margin-top: 0;
+  .hero__stats {
+    margin-top: 28px;
   }
 }
 
 @media (max-width: 600px) {
   .site-header__menu { flex-direction: row; align-items: center; gap: 10px; width: auto; }
   .site-header__cta { width: auto; white-space: nowrap; margin-left: 0; }
-  /* Remove hero media on phone widths */
-  .hero__media,
-  .hero__media-primary,
-  .hero__media-secondary { display: none !important; }
-  /* Add more breathing room to the right of the hero image on small screens */
-  .hero__media { padding-right: clamp(28px, 9vw, 52px); }
-  /* Center the primary image so it doesn't hug the right edge */
-  .hero__media-primary { width: min(92%, 480px); margin: 0 auto; }
+  /* Keep hero media visible but allow it to shrink to avoid horizontal scrolling */
+  .hero__inner { gap: clamp(24px, 9vw, 40px); }
+  .hero__media {
+    width: min(440px, 100%);
+    padding: clamp(10px, 6vw, 18px);
+  }
+  .hero__media-primary {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .hero__media-secondary {
+    margin-bottom: -28px;
+  }
 }
 /* Blog cards replacing Stories */
 .blog-cards { background: var(--color-mint-soft); }
