@@ -590,11 +590,22 @@ function applyImageToElement(element, dataUrl) {
 
   const slotId = element.dataset ? element.dataset.imageSlot : undefined;
   const isImgElement = element.tagName === 'IMG';
+  const isFaviconLink = element.tagName === 'LINK' && typeof element.rel === 'string' && element.rel.includes('icon');
   const nestedImage = isImgElement ? element : element.querySelector('[data-slot-image]');
   const hasBackgroundTarget = !nestedImage || isImgElement;
+<<<<<<< HEAD
   const fallbackSrc = resolveFallbackImage(element, slotId, nestedImage?.dataset?.defaultSrc);
+=======
+  const fallbackHref = isFaviconLink ? element.dataset.defaultSrc : null;
+>>>>>>> Final
 
   if (dataUrl) {
+    if (isFaviconLink) {
+      element.href = dataUrl;
+      element.type = 'image/png';
+      element.classList.remove('is-empty');
+      return;
+    }
     if (nestedImage) {
       nestedImage.src = dataUrl;
       nestedImage.hidden = false;
@@ -627,6 +638,7 @@ function applyImageToElement(element, dataUrl) {
     return;
   }
 
+<<<<<<< HEAD
   if (fallbackSrc) {
     element.classList.remove('is-empty');
     element.style.backgroundImage = `url("${fallbackSrc}")`;
@@ -634,6 +646,21 @@ function applyImageToElement(element, dataUrl) {
     element.classList.add('is-empty');
     element.style.removeProperty('background-image');
   }
+=======
+  if (isFaviconLink) {
+    if (fallbackHref) {
+      element.href = fallbackHref;
+      element.type = 'image/png';
+      element.classList.remove('is-empty');
+    } else {
+      element.removeAttribute('href');
+      element.classList.add('is-empty');
+    }
+    return;
+  }
+
+  element.style.removeProperty('background-image');
+>>>>>>> Final
 }
 
 <<<<<<< HEAD
